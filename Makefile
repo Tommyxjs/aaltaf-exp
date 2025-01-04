@@ -19,6 +19,25 @@ CC	    =   g++
 FLAG    = -I./  -I./minisat/  -D __STDC_LIMIT_MACROS -D __STDC_FORMAT_MACROS -fpermissive
 DEBUGFLAG   =	-D DEBUG -g -pg
 RELEASEFLAG = -O2
+TARGET       = aaltaf
+SHARED_LIB   = libprocess.so
+
+.PHONY: all release debug clean
+
+all: release
+
+# 生成 C 文件
+ltlparser/ltllexer.c :
+	ltlparser/grammar/ltllexer.l
+	flex ltlparser/grammar/ltllexer.l
+
+ltlparser/ltlparser.c :
+	ltlparser/grammar/ltlparser.y
+	bison ltlparser/grammar/ltlparser.y
+
+# 生成共享库
+$(SHARED_LIB): $(FORMULAFILES) $(UTILFILES) $(SOLVER)
+	$(CC) -shared -fPIC -o $@ $^ $(FLAG)
 
 aaltaf :	release
 
@@ -30,15 +49,14 @@ ltlparser/ltlparser.c :
 	ltlparser/grammar/ltlparser.y
 	bison ltlparser/grammar/ltlparser.y
 	
-	
 
 .PHONY :    release debug clean
 
-release :   $(ALLFILES)
+release :   $(ALLFILES) $(SHARED_LIB)
 	    $(CC) $(FLAG) $(RELEASEFLAG) $(ALLFILES) -lz -o aaltaf
 
-debug :	$(ALLFILES)
+debug :	$(ALLFILES) $(SHARED_LIB)
 	$(CC) $(FLAG) $(DEBUGFLAG) $(ALLFILES) -lz -o aaltaf
 
 clean :
-	rm -f *.o *~ aaltaf
+	rm -f *.o *~ aaltaf $(SHARED_LIB)

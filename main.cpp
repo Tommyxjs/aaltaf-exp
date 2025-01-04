@@ -6,7 +6,7 @@
 #include <string.h>
 
 
-#define MAXN 100000
+#define MAXN 100000000
 char in[MAXN];
 
 using namespace aalta;
