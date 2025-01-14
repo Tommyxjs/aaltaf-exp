@@ -59,12 +59,18 @@ ltlf_sat (int argc, char** argv)
 	}
 	if (input_count == 0)
 	{
-		puts ("please input the formula:");
-    	if (fgets (in, MAXN, stdin) == NULL)
-    	{
-        	printf ("Error: read input!\n");
-        	exit (0);
-      	}
+		// puts ("please input the formula:");
+		FILE *file = fopen("/home/xu/Documents/snowcap-CDCL/target/debug/aalta_input.txt", "r");
+    	if (file == NULL) {
+        	printf("Error opening file.\n");
+        	return 1;
+    	}
+		size_t read_size = fread(in, 1, MAXN - 1, file);
+    	// if (fgets (in, MAXN, stdin) == NULL)
+    	// {
+        // 	printf ("Error: read input!\n");
+        // 	exit (0);
+      	// }
 	}
 
 
