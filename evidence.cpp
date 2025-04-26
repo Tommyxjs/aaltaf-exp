@@ -12,6 +12,7 @@
 #include <vector>
 #include <string>
 #include <assert.h>
+#include <fstream>
 using namespace std;
 
 namespace aalta
@@ -68,4 +69,17 @@ namespace aalta
 		}
 	}
 	
+	void Evidence::output_to_file(const string& filename) {
+        ofstream outfile(filename);
+        if (!outfile) {
+            cerr << "Error: Could not open file " << filename << " for writing.\n";
+            return;
+        }
+
+        for (int i = 0; i < traces_.size(); i++) {
+            outfile << traces_[i] << endl;
+        }
+
+        outfile.close();
+    }
 }

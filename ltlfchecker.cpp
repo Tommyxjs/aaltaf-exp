@@ -228,6 +228,12 @@ namespace aalta
 		assert (evidence_ != NULL);
 		evidence_->print ();
 	}
+
+	void LTLfChecker::output_to_file(const string& filename) 
+	{
+		assert (evidence_ != NULL);
+		evidence_->output_to_file(filename);
+	}
 	
 	void LTLfChecker::print_formulas_id (aalta_formula* f)
 	{

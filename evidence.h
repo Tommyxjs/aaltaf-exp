@@ -21,6 +21,7 @@ namespace aalta
 		//functions
 		Evidence () {};
 		void print ();
+		void output_to_file(const std::string& filename);
 		void push (bool);
 		void push (olg_formula&);
 		void push (aalta_formula *);

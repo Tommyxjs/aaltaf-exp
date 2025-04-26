@@ -113,7 +113,8 @@ ltlf_sat (int argc, char** argv)
 	  bool res = checker.check ();
 	  printf ("%s\n", res ? "sat" : "unsat");
 	  if (evidence && res)
-		  checker.print_evidence ();
+		//   checker.print_evidence ();
+		  checker.output_to_file("/home/xu/Documents/snowcap-CDCL/target/debug/output_to_file.txt");
   }
   else
   {
@@ -121,7 +122,8 @@ ltlf_sat (int argc, char** argv)
 	bool res = checker.check ();
 	printf ("%s\n", res ? "sat" : "unsat");
 	if (evidence && res)
-		checker.print_evidence ();
+		// checker.print_evidence ();
+		checker.output_to_file("/home/xu/Documents/snowcap-CDCL/target/debug/output_to_file.txt");
   }
   aalta_formula::destroy();
 }

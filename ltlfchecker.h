@@ -37,6 +37,7 @@ public:
 	}
 	bool check ();
 	void print_evidence ();
+	void output_to_file(const string& filename);
 	
 protected:
 	//flags
